@@ -10,10 +10,19 @@ DOCKER_COMPOSE_ISOLATED_RUN_COMMAND = $(DOCKER_COMPOSE_BASE_COMMAND) run --rm --
 CONSOLE_VERBOSITY = -v
 
 ## Install whole setup & start docker-compose environment
-serve: dcbuild dcpull dcup
-	$(DOCKER_COMPOSE_EXEC_COMMAND) -w /data node-red npm install /repo
+serve: install-locally dcbuild dcpull dcup install-in-container dcup
 	open http://localhost:1880
 .PHONY: serve
+
+## Install package locally
+install-locally:
+	npm install
+.PHONY: install-locally
+
+## Install package in node-red container
+install-in-container:
+	$(DOCKER_COMPOSE_EXEC_COMMAND) -w /data node-red npm install /repo
+.PHONY: install-in-container
 
 ## Stop the whole docker-compose environment
 stop: dcdown
@@ -33,7 +42,7 @@ dcup:
 
 ## Stop docker-compose services
 dcdown:
-	$(DOCKER_COMPOSE_BASE_COMMAND) down --remove-orphans
+	$(DOCKER_COMPOSE_BASE_COMMAND) down --remove-orphans --volumes
 .PHONY: dcdown
 
 ## Pull all docker images for current compose-project
