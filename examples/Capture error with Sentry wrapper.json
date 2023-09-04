@@ -1,0 +1,103 @@
+[
+    {
+        "id": "f6f2187d.f17ca8",
+        "type": "tab",
+        "label": "Flow 1",
+        "disabled": false,
+        "info": ""
+    },
+    {
+        "id": "93f7abbbdda3e4d7",
+        "type": "function",
+        "z": "f6f2187d.f17ca8",
+        "name": "malfunction",
+        "func": "// Create a Date object from the payload\nvar date = new Date(msg.payload);\n// Change the payload to be a formatted Date string\nmsg.payload = date.toStrin();\n// Return the message so it can be sent on\nreturn msg;",
+        "outputs": 1,
+        "noerr": 1,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 550,
+        "y": 120,
+        "wires": [
+            [
+                "988433193d15a381"
+            ]
+        ]
+    },
+    {
+        "id": "94dfd13224f7d899",
+        "type": "inject",
+        "z": "f6f2187d.f17ca8",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 260,
+        "y": 120,
+        "wires": [
+            [
+                "93f7abbbdda3e4d7"
+            ]
+        ]
+    },
+    {
+        "id": "24d8dcf8fb57c612",
+        "type": "catch",
+        "z": "f6f2187d.f17ca8",
+        "name": "",
+        "scope": null,
+        "uncaught": false,
+        "x": 260,
+        "y": 240,
+        "wires": [
+            [
+                "c1f6cee949bb4d1c"
+            ]
+        ]
+    },
+    {
+        "id": "988433193d15a381",
+        "type": "debug",
+        "z": "f6f2187d.f17ca8",
+        "name": "debug 1",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 820,
+        "y": 120,
+        "wires": []
+    },
+    {
+        "id": "c1f6cee949bb4d1c",
+        "type": "sentry-wrapper",
+        "z": "f6f2187d.f17ca8",
+        "name": "Sentry Wrapper",
+        "dsn": "",
+        "environment": "dev",
+        "x": 560,
+        "y": 240,
+        "wires": [
+            [
+                "988433193d15a381"
+            ]
+        ]
+    }
+]
