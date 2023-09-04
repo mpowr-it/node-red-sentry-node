@@ -1,4 +1,4 @@
-const SentryWrapper = require('@sentry/node');
+const Sentry = require('@sentry/node');
 
 module.exports = function (RED) {
     /**
