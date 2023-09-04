@@ -1,9 +1,9 @@
 <script type="text/javascript">
-    RED.nodes.registerType('sentry', {
+    RED.nodes.registerType('sentry-wrapper', {
         category: 'function',
         color: '#ff6526',
         defaults: {
-            name: {value: "Sentry Error Handler"},
+            name: {value: "Sentry Wrapper"},
             dsn: {value: ""},
             environment: {value: "dev"},
         },
@@ -11,12 +11,12 @@
         outputs: 1,
         icon: "alert.png",
         label: function () {
-            return this.name || "sentry";
+            return this.name || "sentry-wrapper";
         }
     });
 </script>
 
-<script type="text/html" data-template-name="sentry">
+<script type="text/html" data-template-name="sentry-wrapper">
     <div class="form-row">
         <label for="node-input-name"><i class="fa fa-tag"></i> Name</label>
         <input type="text" id="node-input-name" placeholder="Name">
@@ -31,7 +31,7 @@
     </div>
 </script>
 
-<script type="text/html" data-help-name="sentry">
+<script type="text/html" data-help-name="sentry-wrapper">
     <p>Send any captured error from Node-RED to your Sentry instance.</p>
     <br>
     <strong>Usage</strong>

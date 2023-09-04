@@ -1,4 +1,4 @@
-const Sentry = require('@sentry/node');
+const SentryWrapper = require('@sentry/node');
 
 module.exports = function (RED) {
     /**
@@ -179,5 +179,5 @@ module.exports = function (RED) {
             message: `Message received for Node ID: ${receiveEvent.destination.id}`
         });
     });
-    RED.nodes.registerType("sentry", SentryNode);
+    RED.nodes.registerType("sentry-wrapper", SentryNode);
 }

@@ -1,4 +1,4 @@
-const sentryNode = require('../src/sentry');
+const sentryNode = require('../src/sentry-wrapper');
 const RED = require('./RED.mock');
 
 beforeEach(() => {
@@ -16,5 +16,5 @@ it('was a hook added to Node-RED', () => {
 it('was a node registered for sentry', () => {
     sentryNode(RED);
     expect(RED.nodes.registerType.mock.calls).toHaveLength(1);
-    expect(RED.nodes.registerType.mock.calls[0][0]).toBe('sentry');
+    expect(RED.nodes.registerType.mock.calls[0][0]).toBe('sentry-wrapper');
 });
