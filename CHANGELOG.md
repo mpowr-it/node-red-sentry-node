@@ -1,6 +1,14 @@
 # CHANGELOG
 
-[1.0.0] - 2023-09-04
+## [1.1.0] - 2023-09-04
+
+[1.1.0]: https://github.com/mpowr-it/node-red-sentry-node/compare/v1.0.0...v1.1.0
+
+* Rename node type to `sentry-wrapper`
+* Add example flow
+* Set minimum node version (>=16.0.0)
+
+## [1.0.0] - 2023-09-04
 
 [1.0.0]: https://github.com/mpowr-it/node-red-sentry-node/tree/v1.0.0
 
