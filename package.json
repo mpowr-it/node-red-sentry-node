@@ -3,6 +3,9 @@
   "license": "MIT",
   "version": "1.0.0",
   "description": "A sentry API wrapper node for Node-RED",
+  "engines": {
+    "node": ">=20.0.0"
+  },
   "dependencies": {
     "@sentry/node": "^7.66.0"
   },
