@@ -1,0 +1,112 @@
+<script type="text/javascript">
+    RED.nodes.registerType('sentry', {
+        category: 'function',
+        color: '#ff6526',
+        defaults: {
+            name: {value: "Sentry Error Handler"},
+            dsn: {value: ""},
+            environment: {value: "dev"},
+        },
+        inputs: 1,
+        outputs: 1,
+        icon: "alert.png",
+        label: function () {
+            return this.name || "sentry";
+        }
+    });
+</script>
+
+<script type="text/html" data-template-name="sentry">
+    <div class="form-row">
+        <label for="node-input-name"><i class="fa fa-tag"></i> Name</label>
+        <input type="text" id="node-input-name" placeholder="Name">
+    </div>
+    <div class="form-row">
+        <label for="node-input-dsn"><i class="fa fa-tag"></i> DSN</label>
+        <input type="text" id="node-input-dsn" placeholder="https://xxxx@xxxx.ingest.sentry.io/xxxx">
+    </div>
+    <div class="form-row">
+        <label for="node-input-environment"><i class="fa fa-tag"></i> Environment</label>
+        <input type="text" id="node-input-environment" placeholder="dev">
+    </div>
+</script>
+
+<script type="text/html" data-help-name="sentry">
+    <p>Send any captured error from Node-RED to your Sentry instance.</p>
+    <br>
+    <strong>Usage</strong>
+    <ol>
+        <li>Pull the sentry node and drop it on the flow.</li>
+        <li>Double click the sentry node to configure it (see "Node properties" below).</li>
+        <li>Drop a catch node (from "common" section) to capture all errors in the flow.</li>
+        <li>Connect the catch node to the sentry node.</li>
+    </ol>
+    <p>That's it.</p>
+    <br/>
+
+    <strong>Node properties</strong>
+    <ul>
+        <li>
+            <code>DSN</code>: This is the unique identifier of your sentry project.
+            You can find it in your sentry project settings under "Client Keys (DSN)".
+        </li>
+        <li>
+            <code>Environment</code>: This tells Sentry which environment the error occurred in.<br/>
+            <strong>Please note:</strong> You can also set the environment via the <code>ENVIRONMENT</code> environment variable.
+            <br/>
+            If both are set, the node property takes precedence.
+        </li>
+    </ul>
+    <br/>
+
+    <strong>Per message configurations</strong>
+    <p>
+        The sentry node will look for the property <code>msg.sentry</code> and if found,
+        any supported config will be set which is contained in the property.
+    </p>
+    <br/>
+
+    <strong>Supported <code>msg.sentry</code> configurations</strong>
+    <ul>
+        <li>
+            User information:
+            <pre><code>{
+  "user": {
+    "id": "U123456",
+    "username": "jdoe",
+    "email": "jdoe@example.com",
+    "ip_address": "127.0.0.1"
+  }
+}</code></pre>
+        </li>
+        <li>
+            Additional tags:
+            <pre><code>{
+  "tags": {
+    "some-tag-key-1": "some-tag-value-1",
+    "some-tag-key-n": "some-tag-value-n"
+  }
+}</code></pre>
+        </li>
+    </ul>
+    <br/>
+
+    <strong>How does it work?</strong>
+    <p>
+        If the <code>msg</code> object includes an error on property <code>msg.error</code> it will be used and sent to
+        your Sentry project. If the message object also contains <code>msg._error</code> it will be added as breadcrumb
+        for to the error.
+    </p>
+    <br/>
+
+    <strong>Node return value</strong>
+    <p>
+        The node will return a payload of type object having a boolean <code>sent</code> property that indicates if the
+        error has been sent to your Sentry project or not.
+        <strong>Please Note:</strong> <code>true</code> does not mean that the error was sent to your Sentry instance
+        successfully
+        (as it may fail due to invalid DSN for example), but it means that
+        this node captured the error, parsed it, and executed <code>Sentry.captureException</code>.
+    </p>
+    <br/>
+</script>

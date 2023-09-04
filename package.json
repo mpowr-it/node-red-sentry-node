@@ -1,0 +1,31 @@
+{
+  "name": "mpowr-it-node-red-sentry-node",
+  "license": "MIT",
+  "version": "1.0.0",
+  "description": "A sentry API wrapper node for Node-RED",
+  "dependencies": {
+    "@sentry/node": "^7.66.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mpowr-it/node-red-sentry-node"
+  },
+  "keywords": [
+    "node-red",
+    "api-wrapper",
+    "sentry"
+  ],
+  "author": "MPOWR IT GmbH",
+  "scripts": {
+    "test": "jest"
+  },
+  "node-red": {
+    "version": ">=3.0.0",
+    "nodes": {
+      "sentry": "src/sentry.js"
+    }
+  },
+  "devDependencies": {
+    "jest": "^29.6.4"
+  }
+}
